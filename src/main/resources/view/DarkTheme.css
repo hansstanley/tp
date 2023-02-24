@@ -346,6 +346,10 @@
     -fx-padding: 8 1 8 1;
 }
 
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
 .tab-pane .tab-header-background {
     -fx-opacity: 0;
 }
