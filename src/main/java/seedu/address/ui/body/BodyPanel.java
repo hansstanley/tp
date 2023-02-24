@@ -9,6 +9,7 @@ import seedu.address.logic.Logic;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.body.address.AddressPanel;
 import seedu.address.ui.body.calendar.CalendarPanel;
+import seedu.address.ui.body.notepad.NotepadPanel;
 
 /**
  * A UI component representing the body section of the app with tabs.
@@ -21,7 +22,8 @@ public class BodyPanel extends UiPart<Region> {
      */
     public enum TabType {
         ADDRESS_BOOK,
-        CALENDAR
+        CALENDAR,
+        NOTEPAD
     }
 
     @FXML
@@ -31,8 +33,10 @@ public class BodyPanel extends UiPart<Region> {
 
     private final AddressPanel addressPanel;
     private final CalendarPanel calendarPanel;
+    private final NotepadPanel notepadPanel;
     private final Tab addressBookTab;
     private final Tab calendarTab;
+    private final Tab notepadTab;
 
     /**
      * Creates a {@code BodyPanel} with the given {@code Logic}.
@@ -52,7 +56,12 @@ public class BodyPanel extends UiPart<Region> {
         calendarTab.setText("Calendar");
         calendarTab.setContent(calendarPanel.getRoot());
 
-        bodyTabs.getTabs().addAll(addressBookTab, calendarTab);
+        notepadPanel = new NotepadPanel();
+        notepadTab = new Tab();
+        notepadTab.setText("Notes");
+        notepadTab.setContent(notepadPanel.getRoot());
+
+        bodyTabs.getTabs().addAll(addressBookTab, calendarTab, notepadTab);
     }
 
     /**
@@ -68,6 +77,9 @@ public class BodyPanel extends UiPart<Region> {
             break;
         case CALENDAR:
             selectionModel.select(calendarTab);
+            break;
+        case NOTEPAD:
+            selectionModel.select(notepadTab);
             break;
         default:
         }

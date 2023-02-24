@@ -40,7 +40,6 @@ public class PersonDetailPanel extends UiPart<Region> {
     public void setPerson(Person person, int displayedIndex) {
         clearPerson();
         if (person == null) {
-            clearPerson();
             return;
         }
 
