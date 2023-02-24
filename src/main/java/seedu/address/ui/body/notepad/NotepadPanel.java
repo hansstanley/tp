@@ -7,8 +7,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.ui.UiPart;
 
-import java.util.List;
-
+/**
+ * Panel for notes.
+ */
 public class NotepadPanel extends UiPart<Region> {
     private static final String FXML = "body/notepad/NotepadPanel.fxml";
 
@@ -17,6 +18,9 @@ public class NotepadPanel extends UiPart<Region> {
     @FXML
     private StackPane notesDetailPanelPlaceholder;
 
+    /**
+     * Creates a {@code NotepadPanel}.
+     */
     public NotepadPanel() {
         super(FXML);
 
@@ -27,6 +31,9 @@ public class NotepadPanel extends UiPart<Region> {
         notesListPanelPlaceholder.getChildren().add(notesListPanel.getRoot());
     }
 
+    /**
+     * Returns an {@code ObservableList} of notes.
+     */
     private ObservableList<String> getDemoNotes() {
         return FXCollections.observableArrayList(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nunc nulla, fringilla at "

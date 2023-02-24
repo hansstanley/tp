@@ -8,12 +8,21 @@ import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;
 
+/**
+ * Panel containing the list of notes.
+ */
 public class NotesListPanel extends UiPart<Region> {
     private static final String FXML = "body/notepad/NotesListPanel.fxml";
 
     @FXML
     private ListView<String> notesListView;
 
+    /**
+     * Creates a {@code NotesListPanel} with the given {@code ObservableList}.
+     *
+     * @param notesList {@code ObservableList} of {@code Note}s.
+     * @param panel Component to show {@code Note} details.
+     */
     public NotesListPanel(ObservableList<String> notesList, NotesDetailPanel panel) {
         super(FXML);
         notesListView.setItems(notesList);
