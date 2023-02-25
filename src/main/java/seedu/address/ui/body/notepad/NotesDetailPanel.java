@@ -32,6 +32,9 @@ public class NotesDetailPanel extends UiPart<Region> {
 
     public void setNote(String note, int displayedIndex) {
         clearNote();
+        if (note == null) {
+            return;
+        }
 
         id.setText(displayedIndex + ".");
         title.setText(note);
