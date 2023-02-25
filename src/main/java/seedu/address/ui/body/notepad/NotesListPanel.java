@@ -1,7 +1,10 @@
 package seedu.address.ui.body.notepad;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
@@ -16,6 +19,8 @@ public class NotesListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<String> notesListView;
+    @FXML
+    private Label count;
 
     /**
      * Creates a {@code NotesListPanel} with the given {@code ObservableList}.
@@ -34,6 +39,12 @@ public class NotesListPanel extends UiPart<Region> {
             int selectedIndex = selectionModel.getSelectedIndex();
             panel.setNote(selectedNote, selectedIndex + 1);
         });
+
+        count.textProperty().bind(getCountProperty(notesList));
+    }
+
+    private StringBinding getCountProperty(ObservableList<String> list) {
+        return Bindings.createStringBinding(() -> String.format("%d note(s)", list.size()), list);
     }
 
     /**
@@ -50,6 +61,11 @@ public class NotesListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new NotesListCard(item, getIndex() + 1).getRoot());
+                if (getIndex() == 0) {
+                    getStyleClass().add("first-cell");
+                } else {
+                    getStyleClass().remove("first-cell");
+                }
             }
         }
     }
