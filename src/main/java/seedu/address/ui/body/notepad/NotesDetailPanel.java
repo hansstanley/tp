@@ -30,23 +30,38 @@ public class NotesDetailPanel extends UiPart<Region> {
         clearNote();
     }
 
-    public void setNote(String note, int displayedIndex) {
+    public void setNote(String note) {
         clearNote();
         if (note == null) {
             return;
         }
 
-        id.setText(displayedIndex + ".");
         title.setText(note);
         createdAt.setText(new Date().toString());
         body.setText(note);
     }
 
     /**
+     * Sets the index of the {@code Note} to be displayed to the user.
+     * If the given {@code index} is less than 1, it is assumed that
+     * no {@code Note} is selected.
+     *
+     * @param index 1-based index of the corresponding {@code Note}.
+     */
+    public void setDisplayedIndex(int index) {
+        if (index < 1) {
+            id.setText("Select a note.");
+        } else {
+            id.setText(String.format("Index: %d", index));
+        }
+    }
+
+    /**
      * Empties the fields, resulting in a blank {@code NotesDetailPanel}.
      */
     public void clearNote() {
-        id.setText("Select a note.");
+        setDisplayedIndex(-1);
+
         title.setText(null);
         createdAt.setText(null);
         body.setText(null);

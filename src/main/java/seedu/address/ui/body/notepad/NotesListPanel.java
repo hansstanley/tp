@@ -1,5 +1,7 @@
 package seedu.address.ui.body.notepad;
 
+import java.util.Objects;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.collections.ObservableList;
@@ -22,6 +24,8 @@ public class NotesListPanel extends UiPart<Region> {
     @FXML
     private Label count;
 
+    private String selectedNote;
+
     /**
      * Creates a {@code NotesListPanel} with the given {@code ObservableList}.
      *
@@ -34,13 +38,32 @@ public class NotesListPanel extends UiPart<Region> {
         notesListView.setCellFactory(listView -> new NotesListCell());
         notesListView.setFocusTraversable(false);
         notesListView.setOnMouseClicked(event -> {
-            MultipleSelectionModel<String> selectionModel = notesListView.getSelectionModel();
-            String selectedNote = selectionModel.getSelectedItem();
-            int selectedIndex = selectionModel.getSelectedIndex();
-            panel.setNote(selectedNote, selectedIndex + 1);
+            String clickedNote = notesListView.getSelectionModel().getSelectedItem();
+            if (Objects.equals(clickedNote, selectedNote)) {
+                // the same Note was clicked on
+                clearSelection();
+            } else {
+                selectedNote = clickedNote;
+            }
         });
 
+        /* Updates NotesDetailPanel accordingly when
+         * the selected Note and index changes.
+         */
+        MultipleSelectionModel<String> model = notesListView.getSelectionModel();
+        model.selectedItemProperty().addListener((observable, oldValue, newValue) -> panel.setNote(newValue));
+        model.selectedIndexProperty().addListener((observable, oldValue, newValue) -> panel
+                .setDisplayedIndex(newValue.intValue() + 1));
+
         count.textProperty().bind(getCountProperty(notesList));
+    }
+
+    /**
+     * Clears the selection in the {@code ListView}.
+     */
+    public void clearSelection() {
+        notesListView.getSelectionModel().clearSelection();
+        selectedNote = null;
     }
 
     private StringBinding getCountProperty(ObservableList<String> list) {
