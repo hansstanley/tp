@@ -1,6 +1,7 @@
 package seedu.address.ui.body.notepad;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -37,7 +38,7 @@ public class NotesDetailPanel extends UiPart<Region> {
         }
 
         title.setText(note);
-        createdAt.setText(new Date().toString());
+        createdAt.setText(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm:ss a").format(LocalDateTime.now()));
         body.setText(note);
     }
 
