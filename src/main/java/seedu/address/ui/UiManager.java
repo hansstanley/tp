@@ -21,6 +21,7 @@ public class UiManager implements Ui {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String CALENDAR_FX_NAME = "calendarfx";
 
     private Logic logic;
     private MainWindow mainWindow;
@@ -35,6 +36,8 @@ public class UiManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
+
+        Thread.setDefaultUncaughtExceptionHandler(getCustomExceptionHandler());
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
@@ -83,6 +86,26 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    private Thread.UncaughtExceptionHandler getCustomExceptionHandler() {
+        return (t, e) -> {
+            StackTraceElement[] elements = e.getStackTrace();
+            if (elements == null || elements.length == 0) {
+                e.printStackTrace();
+                return;
+            }
+            for (StackTraceElement element : elements) {
+                String className = element.getClassName();
+                if (className.contains(CALENDAR_FX_NAME)) {
+                    /* Ignores all exceptions from CalendarFX
+                     * to avoid cluttering the console.
+                     */
+                    return;
+                }
+            }
+            e.printStackTrace();
+        };
     }
 
 }
