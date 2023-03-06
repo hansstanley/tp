@@ -1,6 +1,7 @@
 package seedu.address.ui.body.calendar;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import com.calendarfx.model.Entry;
 
@@ -35,6 +36,6 @@ public class CalendarEntryPopover extends UiPart<Region> {
         description.setText(entry.getTitle());
         startDateTime.setText(entry.getStartAsLocalDateTime().format(formatter));
         endDateTime.setText(entry.getEndAsLocalDateTime().format(formatter));
-        recurrence.setText(entry.getRecurrenceRule());
+        recurrence.setText(Objects.requireNonNullElse(entry.getRecurrenceRule(), "One-time"));
     }
 }

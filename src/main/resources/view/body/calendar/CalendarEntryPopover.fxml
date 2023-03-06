@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" styleClass="pane-with-border, pa"
+<VBox spacing="10" maxWidth="600" styleClass="pane-with-default-background, pa"
       xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-    <Label fx:id="description" text="\$description" styleClass="label-h4" />
-    <Label text="From:" styleClass="label-p" />
-    <Label fx:id="startDateTime" text="\$startDateTime" styleClass="label-p" />
-    <Label text="To:" styleClass="label-p" />
-    <Label fx:id="endDateTime" text="\$endDateTime" styleClass="label-p" />
-    <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p" />
+    <Label fx:id="description" text="\$description" styleClass="label-h4" wrapText="true" />
+    <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p, tag-recurrence" />
+    <Separator />
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="From" styleClass="label-p" minWidth="50" />
+        <Label fx:id="startDateTime" text="\$startDateTime" styleClass="label-p, tag-recurrence" />
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="To" styleClass="label-p" minWidth="50" />
+        <Label fx:id="endDateTime" text="\$endDateTime" styleClass="label-p, tag-recurrence" />
+    </HBox>
 </VBox>

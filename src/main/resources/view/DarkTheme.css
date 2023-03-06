@@ -252,6 +252,10 @@
     -fx-padding: 0;
 }
 
+.pane-with-default-background {
+    -fx-background-color: derive(#1d1d1d, 40%);
+}
+
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
@@ -487,6 +491,12 @@
     -fx-text-fill: black;
 }
 
+.tag-recurrence {
+    -fx-background-color: #2c2c2c;
+    -fx-background-radius: 5;
+    -fx-padding: 2 4 2 4;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -521,6 +531,7 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-font-size: 12;
+    -fx-font-family: "Segoe UI Semibold";
 }
 
 #modules {
@@ -530,6 +541,7 @@
 
 #modules .label {
     -fx-font-size: 12;
+    -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-background-color: #ec5e45;
     -fx-background-radius: 5;
