@@ -1,5 +1,6 @@
 package seedu.address.ui.body;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -47,7 +48,8 @@ public class BodyPanel extends UiPart<Region> {
         addressBookTab.setText("Address Book");
         addressBookTab.setContent(addressPanel.getRoot());
 
-        calendarPanel = new CalendarPanel();
+        calendarPanel = new CalendarPanel(FXCollections
+                .observableArrayList("Hello", "World", "Event A", "Event B"));
         calendarTab = new Tab();
         calendarTab.setText("Calendar");
         calendarTab.setContent(calendarPanel.getRoot());
