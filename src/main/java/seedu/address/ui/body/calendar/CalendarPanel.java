@@ -45,6 +45,7 @@ public class CalendarPanel extends UiPart<Region> {
         DetailedWeekView weekView = new DetailedWeekView();
         weekView.setContextMenuCallback(null); // disables the context menu
         weekView.setEntryFactory(param -> null); // disables entry creation
+        weekView.setEntryDetailsPopOverContentCallback(param -> new CalendarEntryPopover(param.getEntry()).getRoot());
         weekView.getCalendarSources().add(calendarSource);
 
         // Updates the current date and time every 10 seconds
