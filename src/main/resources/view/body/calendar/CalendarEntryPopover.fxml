@@ -8,14 +8,14 @@
 <VBox spacing="10" maxWidth="600" styleClass="pane-with-default-background, pa"
       xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="description" text="\$description" styleClass="label-h4" wrapText="true" />
-    <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p, tag-recurrence" />
+    <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p, tag-dark" />
     <Separator />
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="From" styleClass="label-p" minWidth="50" />
-        <Label fx:id="startDateTime" text="\$startDateTime" styleClass="label-p, tag-recurrence" />
+        <Label fx:id="startDateTime" text="\$startDateTime" styleClass="label-p, tag-dark" />
     </HBox>
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="To" styleClass="label-p" minWidth="50" />
-        <Label fx:id="endDateTime" text="\$endDateTime" styleClass="label-p, tag-recurrence" />
+        <Label fx:id="endDateTime" text="\$endDateTime" styleClass="label-p, tag-dark" />
     </HBox>
 </VBox>
