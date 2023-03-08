@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
+import com.calendarfx.view.DayViewBase;
 import com.calendarfx.view.page.WeekPage;
 
 import javafx.collections.ObservableList;
@@ -56,6 +57,9 @@ public class CalendarPanel extends UiPart<Region> {
         // Changes the entry popover
         weekPage.setEntryDetailsPopOverContentCallback(param -> new CalendarEntryPopover(param.getEntry()).getRoot());
         weekPage.getCalendarSources().add(calendarSource);
+        weekPage.getDetailedWeekView().setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_HEIGHT);
+        weekPage.getDetailedWeekView().setHourHeight(60);
+        weekPage.getDetailedWeekView().setNumberOfDays(4);
 
         calendarPlaceholder.getChildren().add(weekPage);
     }
