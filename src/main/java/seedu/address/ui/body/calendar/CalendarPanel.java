@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
-import com.calendarfx.view.DetailedWeekView;
+import com.calendarfx.view.page.WeekPage;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class CalendarPanel extends UiPart<Region> {
     private StackPane calendarPlaceholder;
 
     private Calendar<Event> calendar;
-    private DetailedWeekView weekView;
+    private WeekPage weekPage;
 
     /**
      * Creates a {@code CalendarPanel}.
@@ -50,14 +50,14 @@ public class CalendarPanel extends UiPart<Region> {
         CalendarSource calendarSource = new CalendarSource("Calendars");
         calendarSource.getCalendars().add(calendar);
 
-        weekView = new DetailedWeekView();
-        weekView.setContextMenuCallback(null); // disables the context menu
-        weekView.setEntryFactory(param -> null); // disables entry creation
+        weekPage = new WeekPage();
+        weekPage.setContextMenuCallback(null); // disables the context menu
+        weekPage.setEntryFactory(param -> null); // disables entry creation
         // Changes the entry popover
-        weekView.setEntryDetailsPopOverContentCallback(param -> new CalendarEntryPopover(param.getEntry()).getRoot());
-        weekView.getCalendarSources().add(calendarSource);
+        weekPage.setEntryDetailsPopOverContentCallback(param -> new CalendarEntryPopover(param.getEntry()).getRoot());
+        weekPage.getCalendarSources().add(calendarSource);
 
-        calendarPlaceholder.getChildren().add(weekView);
+        calendarPlaceholder.getChildren().add(weekPage);
     }
 
     private void fillCalendar(List<Event> events) {
@@ -91,10 +91,10 @@ public class CalendarPanel extends UiPart<Region> {
      * Updates the current date and time of the calendar view every 10 seconds.
      */
     private void startLiveUpdating() {
-        Objects.requireNonNull(weekView);
+        Objects.requireNonNull(weekPage);
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(() -> {
-            weekView.setToday(LocalDate.now());
-            weekView.setTime(LocalTime.now());
+            weekPage.setToday(LocalDate.now());
+            weekPage.setTime(LocalTime.now());
         }, 10, 10, TimeUnit.SECONDS);
     }
 }

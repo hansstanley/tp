@@ -6,5 +6,5 @@
 
 <VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <Label text="Double click on an event to view its details." wrapText="true" styleClass="label-p, tag-light" />
-    <StackPane fx:id="calendarPlaceholder" styleClass="pane-with-rounded-corner-light, pa-b" VBox.vgrow="ALWAYS" />
+    <StackPane fx:id="calendarPlaceholder" styleClass="pane-with-rounded-corner-light" VBox.vgrow="ALWAYS" />
 </VBox>
