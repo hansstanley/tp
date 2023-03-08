@@ -1,7 +1,6 @@
 package seedu.address.ui.body.calendar;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.model.event.Event;
 import seedu.address.ui.UiPart;
 
 /**
@@ -28,13 +28,13 @@ public class CalendarPanel extends UiPart<Region> {
     @FXML
     private StackPane calendarPlaceholder;
 
-    private Calendar<String> calendar;
+    private Calendar<Event> calendar;
     private DetailedWeekView weekView;
 
     /**
      * Creates a {@code CalendarPanel}.
      */
-    public CalendarPanel(ObservableList<String> events) {
+    public CalendarPanel(ObservableList<Event> events) {
         super(FXML);
 
         buildCalendar();
@@ -60,22 +60,30 @@ public class CalendarPanel extends UiPart<Region> {
         calendarPlaceholder.getChildren().add(weekView);
     }
 
-    private void fillCalendar(List<String> events) {
+    private void fillCalendar(List<Event> events) {
         Objects.requireNonNull(calendar);
         Objects.requireNonNull(events);
-        int i = 0;
-        for (String event : events) {
-            Entry<String> entry = new Entry<>(event);
+        for (Event event : events) {
+            Entry<Event> entry = new Entry<>(event.getDescription().getDescription());
             entry.setUserObject(event);
-            entry.setInterval(
-                    LocalDateTime.now().plusHours(i),
-                    LocalDateTime.now().plusHours(i + 1)
-            );
-            if (i % 2 == 0) {
+            entry.setInterval(event.getStartDateTime().getDateTime(), event.getEndDateTime().getDateTime());
+            switch (event.getRecurrence().interval) {
+            case DAILY:
                 entry.setRecurrenceRule("RRULE:FREQ=DAILY");
+                break;
+            case WEEKLY:
+                entry.setRecurrenceRule("RRULE:FREQ=WEEKLY");
+                break;
+            case MONTHLY:
+                entry.setRecurrenceRule("RRULE:FREQ=MONTHLY");
+                break;
+            case YEARLY:
+                entry.setRecurrenceRule("RRULE:FREQ=YEARLY");
+                break;
+            default:
+                entry.setRecurrenceRule(null);
             }
             calendar.addEntry(entry);
-            i++;
         }
     }
 
