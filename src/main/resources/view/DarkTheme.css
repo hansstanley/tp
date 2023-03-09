@@ -525,16 +525,16 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-border-insets: 0;
-    -fx-background-color: #2c2c2c;
+    -fx-background-color: #eeeeee;
     -fx-background-radius: 5;
     -fx-background-insets: 0;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-family: "Segoe UI Semibold";
 }
 
 .button-bar > .container > .button:hover,
 .button-bar > .container > .button:focused {
-    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-background-color: #cccccc;
 }
 
 .button-bar > .container > .button.left-pill {
@@ -575,6 +575,10 @@
 .day-page > .container > .content > .left-side > .agenda-view {
     -fx-padding: 10 0 0 0;
     -fx-background-insets: 0.0px;
+}
+
+.default-style-entry {
+    -fx-background-radius: 0 5 5 0;
 }
 
 #cardPane {

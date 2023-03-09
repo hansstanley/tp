@@ -59,7 +59,7 @@ public class CalendarPanel extends UiPart<Region> {
         weekPage.getCalendarSources().add(calendarSource);
         weekPage.getDetailedWeekView().setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_HEIGHT);
         weekPage.getDetailedWeekView().setHourHeight(60);
-        weekPage.getDetailedWeekView().setNumberOfDays(4);
+        weekPage.getDetailedWeekView().setShowAllDayView(false);
 
         calendarPlaceholder.getChildren().add(weekPage);
     }
