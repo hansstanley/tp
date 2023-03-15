@@ -5,17 +5,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" maxWidth="600" styleClass="pane-with-default-background, pa"
+<VBox spacing="10" maxWidth="600" styleClass="pane-with-border, pa"
       xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="description" text="\$description" styleClass="label-h4" wrapText="true" />
-    <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p, tag-dark" />
+    <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p, tag-accented" />
     <Separator />
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="From" styleClass="label-p" minWidth="50" />
-        <Label fx:id="startDateTime" text="\$startDateTime" styleClass="label-p, tag-dark" />
+        <Label fx:id="startDateTime" text="\$startDateTime" styleClass="label-p, tag-accented" />
     </HBox>
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="To" styleClass="label-p" minWidth="50" />
-        <Label fx:id="endDateTime" text="\$endDateTime" styleClass="label-p, tag-dark" />
+        <Label fx:id="endDateTime" text="\$endDateTime" styleClass="label-p, tag-accented" />
     </HBox>
 </VBox>

@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-    <Label text="Double click on an event to view its details." wrapText="true" styleClass="label-p, tag-light" />
-    <StackPane fx:id="calendarPlaceholder" styleClass="pane-with-rounded-corner-light" VBox.vgrow="ALWAYS" />
+<VBox spacing="10" styleClass="theme-light"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <Label text="Double click on an event to view its details." wrapText="true" styleClass="label-p, tag-accented" />
+    <StackPane fx:id="calendarPlaceholder" styleClass="pane-with-rounded-corner" VBox.vgrow="ALWAYS" />
 </VBox>

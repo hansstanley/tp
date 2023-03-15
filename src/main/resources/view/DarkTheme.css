@@ -205,10 +205,6 @@
     -fx-padding: 0;
 }
 
-.pane-with-default-background {
-    -fx-background-color: derive(#1d1d1d, 40%);
-}
-
 .pane-with-border {
      -fx-background-color: -fx-primary-background;
      -fx-border-color: -fx-primary;
