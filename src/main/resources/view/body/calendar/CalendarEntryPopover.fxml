@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" maxWidth="600" styleClass="pane-with-border, pa"
+<VBox spacing="10" maxWidth="600" styleClass="pane-transparent, pa"
       xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="description" text="\$description" styleClass="label-h4" wrapText="true" />
     <Label fx:id="recurrence" text="\$recurrence" styleClass="label-p, tag-accented" />

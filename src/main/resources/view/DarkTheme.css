@@ -198,6 +198,11 @@
     -fx-padding: 0;
 }
 
+.pane-transparent: {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
 .pane-with-border {
      -fx-background-color: -fx-primary-background;
      -fx-border-color: -fx-primary;
