@@ -10,13 +10,13 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ui.tab.TabInfo;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.OneTimeEvent;
 import seedu.address.model.event.RecurringEvent;
 import seedu.address.model.event.fields.DateTime;
 import seedu.address.model.event.fields.Description;
 import seedu.address.model.event.fields.Recurrence;
-import seedu.address.logic.ui.tab.TabInfo;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.body.address.AddressPanel;
 import seedu.address.ui.body.calendar.CalendarPanel;
@@ -45,7 +45,7 @@ public class BodyPanel extends UiPart<Region> {
 
         this.logic = logic;
         this.addressPanel = new AddressPanel(logic.getFilteredPersonList());
-        this.calendarPanel = new CalendarPanel();
+        this.calendarPanel = new CalendarPanel(getEventList());
         this.userPanel = new UserPanel(logic.getUserData());
 
         for (TabInfo tabInfo : logic.getTabInfoList()) {
@@ -67,25 +67,6 @@ public class BodyPanel extends UiPart<Region> {
             bodyTabs.getTabs().add(tab);
         }
 
-        // TODO: replace eventList with data from logic.
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        String date1 = LocalDateTime.now().format(formatter);
-        String date2 = LocalDateTime.now().plusHours(1).format(formatter);
-        String date3 = LocalDateTime.now().plusDays(1).plusHours(2).format(formatter);
-        String date4 = LocalDateTime.now().plusDays(1).plusHours(4).format(formatter);
-        Event event1 = new OneTimeEvent(new Description("Event 1"), new DateTime(date1), new DateTime(date2));
-        Event event2 = new OneTimeEvent(new Description("Event 2"), new DateTime(date3), new DateTime(date4));
-        Event event3 = new RecurringEvent(new Description("Recurring Event 3"),
-                new DateTime(date1), new DateTime(date2), new Recurrence("daily"));
-        Event event4 = new RecurringEvent(new Description("Recurring Event 4"),
-                new DateTime(date3), new DateTime(date4), new Recurrence("weekly"));
-        ObservableList<Event> eventList = FXCollections.observableArrayList(event1, event2, event3, event4);
-        calendarPanel = new CalendarPanel(eventList);
-        calendarTab = new Tab();
-        calendarTab.setText("Calendar");
-        calendarTab.setContent(calendarPanel.getRoot());
-
-        bodyTabs.getTabs().addAll(addressBookTab, calendarTab);
         logic.getSelectedTab().addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 return;
@@ -108,5 +89,21 @@ public class BodyPanel extends UiPart<Region> {
 
     public UserPanel getUserPanel() {
         return userPanel;
+    }
+
+    private ObservableList<Event> getEventList() {
+        // TODO: replace eventList with data from logic.
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        String date1 = LocalDateTime.now().format(formatter);
+        String date2 = LocalDateTime.now().plusHours(1).format(formatter);
+        String date3 = LocalDateTime.now().plusDays(1).plusHours(2).format(formatter);
+        String date4 = LocalDateTime.now().plusDays(1).plusHours(4).format(formatter);
+        Event event1 = new OneTimeEvent(new Description("Event 1"), new DateTime(date1), new DateTime(date2));
+        Event event2 = new OneTimeEvent(new Description("Event 2"), new DateTime(date3), new DateTime(date4));
+        Event event3 = new RecurringEvent(new Description("Recurring Event 3"),
+                new DateTime(date1), new DateTime(date2), new Recurrence("daily"));
+        Event event4 = new RecurringEvent(new Description("Recurring Event 4"),
+                new DateTime(date3), new DateTime(date4), new Recurrence("weekly"));
+        return FXCollections.observableArrayList(event1, event2, event3, event4);
     }
 }
