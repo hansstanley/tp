@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
@@ -17,23 +16,17 @@ import seedu.address.model.event.RecurringEvent;
 import seedu.address.model.event.fields.DateTime;
 import seedu.address.model.event.fields.Description;
 import seedu.address.model.event.fields.Recurrence;
+import seedu.address.logic.ui.tab.TabInfo;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.body.address.AddressPanel;
 import seedu.address.ui.body.calendar.CalendarPanel;
+import seedu.address.ui.body.user.UserPanel;
 
 /**
  * A UI component representing the body section of the app with tabs.
  */
 public class BodyPanel extends UiPart<Region> {
     private static final String FXML = "body/BodyPanel.fxml";
-
-    /**
-     * An enum to identify tabs.
-     */
-    public enum TabType {
-        ADDRESS_BOOK,
-        CALENDAR
-    }
 
     @FXML
     private TabPane bodyTabs;
@@ -42,8 +35,7 @@ public class BodyPanel extends UiPart<Region> {
 
     private final AddressPanel addressPanel;
     private final CalendarPanel calendarPanel;
-    private final Tab addressBookTab;
-    private final Tab calendarTab;
+    private final UserPanel userPanel;
 
     /**
      * Creates a {@code BodyPanel} with the given {@code Logic}.
@@ -52,11 +44,28 @@ public class BodyPanel extends UiPart<Region> {
         super(FXML);
 
         this.logic = logic;
+        this.addressPanel = new AddressPanel(logic.getFilteredPersonList());
+        this.calendarPanel = new CalendarPanel();
+        this.userPanel = new UserPanel(logic.getUserData());
 
-        addressPanel = new AddressPanel(logic.getFilteredPersonList());
-        addressBookTab = new Tab();
-        addressBookTab.setText("Address Book");
-        addressBookTab.setContent(addressPanel.getRoot());
+        for (TabInfo tabInfo : logic.getTabInfoList()) {
+            Tab tab = new Tab();
+            tab.setText(tabInfo.toString());
+            switch (tabInfo.getTabType()) {
+            case ADDRESS_BOOK:
+                tab.setContent(addressPanel.getRoot());
+                break;
+            case CALENDAR:
+                tab.setContent(calendarPanel.getRoot());
+                break;
+            case USER:
+                tab.setContent(userPanel.getRoot());
+                break;
+            default:
+                continue;
+            }
+            bodyTabs.getTabs().add(tab);
+        }
 
         // TODO: replace eventList with data from logic.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -77,24 +86,16 @@ public class BodyPanel extends UiPart<Region> {
         calendarTab.setContent(calendarPanel.getRoot());
 
         bodyTabs.getTabs().addAll(addressBookTab, calendarTab);
+        logic.getSelectedTab().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                return;
+            }
+            bodyTabs.getSelectionModel().select(newValue.getIndex().getZeroBased());
+        });
     }
 
-    /**
-     * Switches to the specified tab.
-     *
-     * @param tabType Identifier for tabs.
-     */
-    public void selectTab(TabType tabType) {
-        SingleSelectionModel<Tab> selectionModel = bodyTabs.getSelectionModel();
-        switch (tabType) {
-        case ADDRESS_BOOK:
-            selectionModel.select(addressBookTab);
-            break;
-        case CALENDAR:
-            selectionModel.select(calendarTab);
-            break;
-        default:
-        }
+    public Logic getLogic() {
+        return logic;
     }
 
     public AddressPanel getAddressPanel() {
@@ -103,5 +104,9 @@ public class BodyPanel extends UiPart<Region> {
 
     public CalendarPanel getCalendarPanel() {
         return calendarPanel;
+    }
+
+    public UserPanel getUserPanel() {
+        return userPanel;
     }
 }

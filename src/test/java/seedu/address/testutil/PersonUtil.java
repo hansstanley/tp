@@ -13,9 +13,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.editpersoncommandsparser.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.fields.subfields.Tag;
 
 
 
@@ -45,7 +45,7 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        sb.append(PREFIX_GENDER + person.getGender().value + " ");
+        sb.append(PREFIX_GENDER + person.getGender().toString() + " ");
         sb.append(PREFIX_MAJOR + person.getMajor().majorName + " ");
         sb.append(PREFIX_RACE + person.getRace().race + " ");
         sb.append(PREFIX_COMMS + person.getComms().nameOfCommunicationChannel + " ");
@@ -69,7 +69,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
-        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender).append(" "));
         descriptor.getMajor().ifPresent(major -> sb.append(PREFIX_MAJOR).append(major.majorName).append(" "));
         descriptor.getRace().ifPresent(race -> sb.append(PREFIX_RACE).append(race.race).append(" "));
         descriptor.getComms().ifPresent(comms ->
