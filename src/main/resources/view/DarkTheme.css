@@ -20,6 +20,28 @@
     -fx-list-selected: derive(#424d5f, 90%);
 }
 
+.theme-green {
+    -fx-primary: #588157;
+    -fx-primary-foreground: #3a5a40;
+    -fx-primary-background: #344e41;
+    -fx-primary-text: white;
+    -fx-secondary-text: #a3b18a;
+    -fx-list-odd: derive(#3a5a40, 10%);
+    -fx-list-even: derive(#3a5a40, 20%);
+    -fx-list-selected: derive(#3a5a40, -10%);
+}
+
+.theme-pink {
+    -fx-primary: #ffc2d1;
+    -fx-primary-foreground: #ffb3c6;
+    -fx-primary-background: #ffe5ec;
+    -fx-primary-text: black;
+    -fx-secondary-text: #ff8fab;
+    -fx-list-odd: derive(#ffb3c6, 30%);
+    -fx-list-even: derive(#ffb3c6, 40%);
+    -fx-list-selected: derive(#ffb3c6, -10%);
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
